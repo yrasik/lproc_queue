@@ -1,0 +1,10 @@
+/Release_Linux/
+/Release_MinGW/
+*.pdf
+*.synctex.gz
+
+*.d
+*.o
+*.mk
+*.so
+/.settings

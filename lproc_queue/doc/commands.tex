@@ -1,0 +1,108 @@
+% МАКРОСЫ, СПЕЦИФИЧЕСКИЕ ДЛЯ ДАННОГО ДОКУМЕНТА   Подключается в преамбуле
+
+\hyphenation{классицис-ти-чес-кой} % Помогаем LaTeX с переносами
+\hyphenation{кирил-ли-чес-ких} % Помогаем LaTeX с переносами
+
+
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}% Выравнивание столбца по левому краю
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}% Выравнивание столбца по левому центру
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}% Выравнивание столбца по правому краю
+
+
+
+\newminted[Lua]{lua}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+               frame = single, %Код заключен в прямоугольник
+               baselinestretch=1.1 %Расстояние между строчками
+               }
+
+\newminted[Diff]{diff}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+               frame = single, %Код заключен в прямоугольник
+               baselinestretch=1.1 %Расстояние между строчками
+               }
+
+\newminted[CcodeII]{c}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+               frame = single, %Код заключен в прямоугольник
+               baselinestretch=1.1 %Расстояние между строчками
+               }
+               
+\newminted[BASHcode]{bash}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+               frame = single, %Код заключен в прямоугольник
+               framerule = 1.5pt,
+               baselinestretch=1.1 %Расстояние между строчками
+               }
+
+\newminted[TEXTcode]{text}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=0mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+               frame = single, %Код заключен в прямоугольник
+               baselinestretch=1.1 %Расстояние между строчками
+               }
+
+\newminted[TEXTpicture]{text}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+               frame = single, %Код заключен в прямоугольник
+               baselinestretch=0.7 %Расстояние между строчками
+               }
+
+\newminted[MAKEFILEcode]{make}{
+               fontsize=\footnotesize,
+               %linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=0mm,
+%               frame = single, %Код заключен в прямоугольник
+               frame = lines,
+               baselinestretch=1.1 %Расстояние между строчками 
+               }
+
+\newminted[VerilogCode]{verilog}{
+               fontsize=\footnotesize,
+               linenos,
+               breaklines,    % Перенос кода на другую строку
+               numbersep=2mm,  %Отступ от номеров строк до кода
+               xleftmargin=5mm,
+               frame = lines, %Линия над кодом и линия под кодом
+               baselinestretch=1.1 %Расстояние между строчками
+               }
+
+
+
+
+\definecolor{Gray}{gray}{0.94}%
+\definecolor{ColorFunction}{HTML}{DDDCF9}
+\definecolor{ColorArgs}{HTML}{FBEDB4}
+\definecolor{ColorRet}{HTML}{DEF8BF}
+
+
+
+
+
+
