@@ -1,0 +1,8 @@
+config BR2_PACKAGE_LPROC_QUEUE
+    bool "lproc_queue"
+
+    help
+      Multithreading for Lua
+
+comment "Multithreading for Lua"
+
