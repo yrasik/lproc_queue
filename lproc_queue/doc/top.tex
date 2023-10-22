@@ -502,7 +502,7 @@ local proc = [[
   lproc_queue.delay_ms(500)
   print('from proc')
 
-  proc_queue.proc_exit()  --[=[ <--- ]=]
+  lproc_queue.proc_exit()  --[=[ <--- ]=]
 ]]
 
 local ret = lproc_queue.proc_start(proc)
@@ -616,7 +616,7 @@ if (queue__to_proc == 0) then
   os.exit()
 end
 
-local ret = queue_destroy(queue__to_proc)  --[[ <--- ]]
+local ret = lproc_queue.queue_destroy(queue__to_proc)  --[[ <--- ]]
 
 if (ret == false) then
   print('ERROR')
@@ -896,7 +896,7 @@ if (sem__to_proc == 0) then
   os.exit()
 end
 
-local ret = sem_destroy(sem__to_proc)  --[[ <--- ]]
+local ret = lproc_queue.sem_destroy(sem__to_proc)  --[[ <--- ]]
 
 if (ret == false) then
   print('ERROR')
@@ -954,7 +954,7 @@ lproc_queue.delay_ms(500)
 
 while true do
   print('from proc')
-  ret = lproc_queue.sem_timedwait_ms(channel_inб 500)
+  ret = lproc_queue.sem_timedwait_ms(semaphore_in, 500)
 end
 ]]
 
@@ -1035,7 +1035,7 @@ lproc_queue.delay_ms(500)
 
 while true do
   print('from proc')
-  ret = lproc_queue.sem_timedwait_ms(channel_in, 500)
+  ret = lproc_queue.sem_timedwait_ms(semaphore_in, 500)
 end
 ]]
 
@@ -1057,31 +1057,6 @@ while true do
   end
 end
 \end{Lua}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
