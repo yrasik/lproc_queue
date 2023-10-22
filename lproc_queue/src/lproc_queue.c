@@ -536,8 +536,8 @@ static int ll_queue_nb_pop(lua_State *L) {
 		return 1;
 	}
 
-	size_t size = FIFO_COUNT(queue_point->queue_messages);
-	if (size == 0) {
+	size_t queue_count = FIFO_COUNT(queue_point->queue_messages);
+	if (queue_count == 0) {
 		lua_pushboolean(L, 0);
 		pthread_mutex_unlock(&kernel_access);
 		return 1;
@@ -546,11 +546,11 @@ static int ll_queue_nb_pop(lua_State *L) {
 	size_t to_size;
 	char *to_array;
 	FIFO_POP(queue_point->queue_messages, ref_from_array, &to_size, &to_array);
-	size--;
+	queue_count--;
 	//info_3("INFO: size = %d  to_size = %d\n", (int)size, (int)to_size);
 	lua_pushboolean(L, 1);
 	lua_pushlstring(L, to_array, to_size);
-	lua_pushinteger(L, (lua_Integer) size);
+	lua_pushinteger(L, (lua_Integer) queue_count);
 	pthread_mutex_unlock(&kernel_access);
 	return 3;
 }
@@ -588,7 +588,6 @@ static void* ll_thread(void *arg) {
 	lua_pop(L, 1);
 	if (lua_pcall(L, 0, 0, 0) != 0) /* call main chunk */
 		fprintf(stderr, "thread error: %s", lua_tostring(L, -1));
-//  pthread_cond_destroy(&getself(L)->cond);
 	lua_close(L);
 	return NULL;
 }
