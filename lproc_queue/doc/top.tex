@@ -317,9 +317,7 @@ lua5.3 ./probe_01.lua
 \newpage
 \section{Описание функций}
 
-\subsection{Статические функции}
-
-\subsubsection{\texttt{version()} - версия библиотеки}
+\subsection{\texttt{version()} - версия библиотеки}
 
 \small
 \begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
@@ -359,10 +357,9 @@ print(version)
 
 
 \newpage
-\subsubsection{Задержки}
+\subsection{Задержки}
 
-\paragraph{\texttt{delay\_us()} - задержка в микросекундах}
-\
+\subsubsection{\texttt{delay\_us()} - задержка в микросекундах}
 
 \small
 \begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
@@ -399,8 +396,7 @@ lproc_queue.delay_us(300)  --[[ <--- ]]
 
 
 
-\paragraph{\texttt{delay\_ms()} - задержка в миллисекундах}
-\
+\subsubsection{\texttt{delay\_ms()} - задержка в миллисекундах}
 
 \small
 \begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
@@ -438,8 +434,7 @@ lproc_queue.delay_ms(300)  --[[ <--- ]]
 
 
 
-\paragraph{\texttt{delay\_s()} - задержка в секундах}
-\
+\subsubsection{\texttt{delay\_s()} - задержка в секундах}
 
 \small
 \begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
@@ -476,7 +471,7 @@ lproc_queue.delay_s(2)  --[[ <--- ]]
 
 
 \newpage
-\subsubsection{\texttt{timeofday()} - обёртка над gettimeofday()}
+\subsection{\texttt{timeofday()} - обёртка над gettimeofday()}
 
 Возвращает системное время в секундах от 1970~г. и довесок к этому в мкСек.
 
@@ -514,6 +509,472 @@ local lproc_queue = require('lproc_queue')
 ...
 local sec, usec = lproc_queue.timeofday()  --[[ <--- ]]
 \end{Lua}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsection{Процессы}
+
+
+\subsubsection{\texttt{proc\_start()} - создание и запуск процесса}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ proc\_start() }} \label{t:proc_start} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret) = proc\_start(string proc\_body) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:proc_start}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \rowcolor{ColorArgs}
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & string & proc\_body & Строка текста, содержащая Lua - код дочернего процесса &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки;\\
+                                    \texttt{true} - в случае успеха.
+                                   } & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local proc = [[
+-- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
+while true do
+  lproc_queue.delay_ms(500)
+  print('from proc')
+end
+]]
+
+local ret = lproc_queue.proc_start(proc)  --[[ <--- ]]
+
+if( ret == false) then
+  print('ERROR')
+  os.exit()
+end
+
+while true do
+  lproc_queue.delay_ms(500)
+end
+
+\end{Lua}
+
+
+\newpage
+\subsubsection{\texttt{proc\_exit()} - самозавершение дочернего процесса}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ proc\_exit() }} \label{t:proc_exit} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering proc\_exit() } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:proc_exit}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \rowcolor{ColorArgs}
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+   &  &  & Функция вызывается из дочернего процесса, не принимает аргументов &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+   &  &  & Не возвращает аргументов & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local proc = [[
+-- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
+
+  lproc_queue.delay_ms(500)
+  print('from proc')
+
+  proc_queue.proc_exit()  --[[ <--- ]]
+]]
+
+local ret = lproc_queue.proc_start(proc)
+
+if( ret == false) then
+  print('ERROR')
+end
+
+while true do
+  lproc_queue.delay_ms(500)
+end
+
+\end{Lua}
+
+
+
+
+
+
+\newpage
+\subsection{Очереди сообщений}
+
+\subsubsection{\texttt{queue\_create()} - создание очереди сообщений}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ queue\_create() }} \label{t:queue_create} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (integer queue\_pointer) = queue\_create() } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:queue_create}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & integer & queue\_pointer & \parbox{73mm}{\vspace{1mm} 
+                                                 \texttt{0} - в случае ошибки;\\
+                                                 \texttt{указатель на объект очереди} - в случае успеха.
+                                                } & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local queue__to_proc = lproc_queue.queue_create()  --[[ <--- ]]
+
+if (queue__to_proc == 0) then
+  print('ERROR')
+end
+
+\end{Lua}
+
+
+\newpage
+\subsubsection{\texttt{queue\_destroy()} - уничтожение очереди сообщений}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ queue\_destroy() }} \label{t:queue_destroy} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret) = queue\_destroy(integer queue\_pointer) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:queue_destroy}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & integer & queue\_pointer & Указатель на объект очереди &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки;\\
+                                    \texttt{true} - в случае успеха.
+                                   } & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local queue__to_proc = lproc_queue.queue_create()
+
+if (queue__to_proc == 0) then
+  print('ERROR')
+  os.exit()
+end
+
+local ret = queue_destroy(queue__to_proc)  --[[ <--- ]]
+
+if (ret == false) then
+  print('ERROR')
+  os.exit()
+end
+
+\end{Lua}
+
+
+
+
+
+
+\newpage
+\subsubsection{\texttt{queue\_push()} - неблокирующее помещение сообщения в очередь}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ queue\_push() }} \label{t:queue_push} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret), (integer queue\_space) = queue\_push(integer queue\_pointer, lstring byte\_array) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:queue_push}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & integer & queue\_pointer & Указатель на объект очереди &  \\ \hline
+  2 & lstring & byte\_array    & Массив байт или сторка &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки;\\
+                                    \texttt{true} - в случае успеха.
+                                   } & \\ \hline
+  2 & integer & queue\_space & Если первый возврпщаемый аргумент \texttt{true}, то количество оставшегося свободного места в очереди. & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local proc_pattern = [[
+local channel_in = <channel_in>
+local ret, message, queue_count, space
+
+-- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
+while true do
+  lproc_queue.delay_ms(500)
+  print('from proc')
+  ret, message, queue_count = lproc_queue.queue_nb_pop(channel_in)
+end
+]]
+
+
+local queue__to_proc = lproc_queue.queue_create()
+local proc = string.gsub(proc_pattern, '<channel_in>', string.format("0x%016X", queue__to_proc))
+
+local ret = lproc_queue.proc_start(proc)
+
+if (ret == false) then
+  print('ERROR')
+  os.exit()
+end
+
+while true do
+  lproc_queue.delay_ms(321)
+  ret, space = lproc_queue.queue_push(queue__to_proc, 'message')  --[[ <--- ]]
+  if (ret == false) then
+    print('ERROR')
+  end
+end
+
+\end{Lua}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\subsection{Семафоры}
+
+\subsubsection{\texttt{sem\_create()} - создание семафора}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ sem\_create() }} \label{t:sem_create} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (integer sem\_pointer) = sem\_create() } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:sem_create}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & integer & sem\_pointer & \parbox{73mm}{\vspace{1mm} 
+                                                 \texttt{0} - в случае ошибки;\\
+                                                 \texttt{указатель на объект семафора} - в случае успеха.
+                                                } & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local sem__to_proc = lproc_queue.sem_create()  --[[ <--- ]]
+
+if (sem__to_proc == 0) then
+  print('ERROR')
+end
+
+\end{Lua}
+
+
+
+
+\newpage
+\subsubsection{\texttt{sem\_destroy()} - уничтожение семафора}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ sem\_destroy() }} \label{t:sem_destroy} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret) = sem\_destroy(integer sem\_pointer) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:sem_destroy}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & integer & sem\_pointer & Указатель на объект семафора &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки;\\
+                                    \texttt{true} - в случае успеха.
+                                   } & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local sem__to_proc = lproc_queue.sem_create()
+
+if (sem__to_proc == 0) then
+  print('ERROR')
+  os.exit()
+end
+
+local ret = sem_destroy(sem__to_proc)  --[[ <--- ]]
+
+if (ret == false) then
+  print('ERROR')
+  os.exit()
+end
+
+\end{Lua}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -507,7 +507,8 @@ static int ll_queue_push(lua_State *L) {
 	const char *from_array = luaL_checklstring(L, 2, &from_size);
 	from_size = (from_size > ARRAY_SIZE) ? ARRAY_SIZE : from_size;
 
-	if ( FIFO_SPACE(queue_point->queue_messages) == 0) {
+	size_t queue_space = FIFO_SPACE(queue_point->queue_messages);
+	if (queue_space == 0) {
 		//luaL_error(L, "error fifo is full: %s", lua_tostring(L, -1));
 		info_3("WARNING: fifo is full\n");
 		lua_pushboolean(L, 0);
@@ -517,8 +518,9 @@ static int ll_queue_push(lua_State *L) {
 
 	FIFO_PUSH(queue_point->queue_messages, copy_to_array, from_size, from_array);
 	lua_pushboolean(L, 1);
+	lua_pushinteger(L, (lua_Integer) queue_space);
 	pthread_mutex_unlock(&kernel_access);
-	return 1;
+	return 2;
 }
 
 
@@ -570,11 +572,16 @@ static int ll_proc_start(lua_State *L) {
 	if (luaL_loadstring(L1, chunk) != 0)
 		luaL_error(L, "error starting thread: %s", lua_tostring(L1, -1));
 
-	if (pthread_create(&thread, NULL, ll_thread, L1) != 0)
-		luaL_error(L, "unable to create new thread");
+	if (pthread_create(&thread, NULL, ll_thread, L1) != 0) {
+		//luaL_error(L, "unable to create new thread"); //FIXME
+		info_3("ERROR: if (pthread_create(&thread, NULL, ll_thread, L1) != 0)\n");
+		lua_pushboolean(L, 0);
+		return 1;
+	}
 
 	pthread_detach(thread);
-	return 0;
+	lua_pushboolean(L, 1);
+	return 1;
 }
 
 
