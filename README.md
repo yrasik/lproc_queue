@@ -37,3 +37,5 @@
 Тестовый проект лежит в папке `lproc_queue/lproc_queue/tests/probe_01/`
 рядом с символической ссылкой на библиотеку. Для запуска теста надо перейти
 в эту папку и ввести команду `lua5.3 ./probe_01.lua`.
+
+Подробная документация к библиотеке лежит в файле [lproc_queue.pdf](lproc_queue/lproc_queue/doc/lproc_queue.pdf)
