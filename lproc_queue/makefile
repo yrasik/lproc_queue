@@ -55,8 +55,7 @@ DEFINES := -DSTRUCT_PACKED -DPIC
 INC_DIR := \
 	-I$(INC_LUA_DIR) \
 		\
-	-I$(SRC_FOLDER)/debug \
-	-I$(SRC_FOLDER)/time
+	-I$(SRC_FOLDER)/debug 
 
 
 LIB_DIR := \
@@ -68,8 +67,7 @@ LIBS := -lpthread -l$(LIB_LUA)
 
 
 OBJS += \
-	$(BUILD_FOLDER)/lproc_queue.o \
-	$(BUILD_FOLDER)/time/ul_time.o
+	$(BUILD_FOLDER)/lproc_queue.o 
 
 
 
@@ -114,10 +112,3 @@ $(BUILD_FOLDER)/%.o: $(SRC_FOLDER)/%.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-$(BUILD_FOLDER)/time/%.o: $(SRC_FOLDER)/time/%.c
-	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C Compiler'
-	mkdir -p $(BUILD_FOLDER)/time
-	$(GCC) $(GCC_FLAGS) $(DEFINES) $(INC_DIR) -O3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '

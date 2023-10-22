@@ -357,46 +357,7 @@ print(version)
 
 
 \newpage
-\subsection{Задержки}
-
-\subsubsection{\texttt{delay\_us()} - задержка в микросекундах}
-
-\small
-\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
-  \caption{Функция \texttt{ delay\_us()}} \label{t:delay_us} \\
-  \hline
-  \rowcolor{ColorFunction}
-  \multicolumn{5}{|c|}{\centering  delay\_us(integer us) } \\\hline
-  \rowcolor{Gray}
-  \multicolumn{1}{|C{7mm}}{№} &
-  \multicolumn{1}{|C{15mm}}{\centering Тип} &
-  \multicolumn{1}{|C{26mm}}{\centering Имя} &
-  \multicolumn{1}{|L{73mm}}{\centering Описание} &
-  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
-  \endfirsthead
-  \caption*{Продолжение таблицы \ref{t:delay_us}} \\
-  \hline
-  \rowcolor{Gray}
-  \multicolumn{1}{|C{7mm}}{№} &
-  \multicolumn{1}{|C{15mm}}{\centering Тип} &
-  \multicolumn{1}{|C{26mm}}{\centering Имя} &
-  \multicolumn{1}{|L{73mm}}{\centering Описание} &
-  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
-  \endhead
-  \rowcolor{ColorArgs}
-  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
-  1 & integer & us & На сколько микросекунд задержать &  \\ \hline
-\end{longtable} \normalsize
-
-\begin{Lua}
-local lproc_queue = require('lproc_queue')
-...
-lproc_queue.delay_us(300)  --[[ <--- ]]
-\end{Lua}
-
-
-
-\subsubsection{\texttt{delay\_ms()} - задержка в миллисекундах}
+\subsection{\texttt{delay\_ms()} - задержка в миллисекундах}
 
 \small
 \begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
@@ -430,95 +391,6 @@ local lproc_queue = require('lproc_queue')
 ...
 lproc_queue.delay_ms(300)  --[[ <--- ]]
 \end{Lua}
-
-
-
-
-\subsubsection{\texttt{delay\_s()} - задержка в секундах}
-
-\small
-\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
-  \caption{Функция \texttt{ delay\_s() }} \label{t:delay_s} \\
-  \hline
-  \rowcolor{ColorFunction}
-  \multicolumn{5}{|c|}{\centering delay\_s(integer s) } \\\hline
-  \rowcolor{Gray}
-  \multicolumn{1}{|C{7mm}}{№} &
-  \multicolumn{1}{|C{15mm}}{\centering Тип} &
-  \multicolumn{1}{|C{26mm}}{\centering Имя} &
-  \multicolumn{1}{|L{73mm}}{\centering Описание} &
-  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
-  \endfirsthead
-  \caption*{Продолжение таблицы \ref{t:delay_s}} \\
-  \hline
-  \rowcolor{Gray}
-  \multicolumn{1}{|C{7mm}}{№} &
-  \multicolumn{1}{|C{15mm}}{\centering Тип} &
-  \multicolumn{1}{|C{26mm}}{\centering Имя} &
-  \multicolumn{1}{|L{73mm}}{\centering Описание} &
-  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
-  \endhead
-  \rowcolor{ColorArgs}
-  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
-  1 & integer & s & На сколько секунд задержать &  \\ \hline
-\end{longtable} \normalsize
-
-\begin{Lua}
-local lproc_queue = require('lproc_queue')
-...
-lproc_queue.delay_s(2)  --[[ <--- ]]
-\end{Lua}
-
-
-\newpage
-\subsection{\texttt{timeofday()} - обёртка над gettimeofday()}
-
-Возвращает системное время в секундах от 1970~г. и довесок к этому в мкСек.
-
-\small
-\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
-  \caption{Функция \texttt{ timeofday() }} \label{t:timeofday} \\
-  \hline
-  \rowcolor{ColorFunction}
-  \multicolumn{5}{|c|}{\centering (integer s), (integer us) = timeofday() } \\\hline
-  \rowcolor{Gray}
-  \multicolumn{1}{|C{7mm}}{№} &
-  \multicolumn{1}{|C{15mm}}{\centering Тип} &
-  \multicolumn{1}{|C{26mm}}{\centering Имя} &
-  \multicolumn{1}{|L{73mm}}{\centering Описание} &
-  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
-  \endfirsthead
-  \caption*{Продолжение таблицы \ref{t:timeofday}} \\
-  \hline
-  \rowcolor{Gray}
-  \multicolumn{1}{|C{7mm}}{№} &
-  \multicolumn{1}{|C{15mm}}{\centering Тип} &
-  \multicolumn{1}{|C{26mm}}{\centering Имя} &
-  \multicolumn{1}{|L{73mm}}{\centering Описание} &
-  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
-  \endhead
-  \rowcolor{ColorRet}
-  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
-  1 & integer & s      & Количество секунд, прошедших с начала Эпохи (1 января 1970~г.) & \\ \hline
-  2 & integer & us     & Дополнение к секундам с начала Эпохи в микросекундах  &  \\ \hline
-\end{longtable} \normalsize
-
-
-\begin{Lua}
-local lproc_queue = require('lproc_queue')
-...
-local sec, usec = lproc_queue.timeofday()  --[[ <--- ]]
-\end{Lua}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -630,7 +502,7 @@ local proc = [[
   lproc_queue.delay_ms(500)
   print('from proc')
 
-  proc_queue.proc_exit()  --[[ <--- ]]
+  proc_queue.proc_exit()  --[=[ <--- ]=]
 ]]
 
 local ret = lproc_queue.proc_start(proc)
@@ -792,7 +664,7 @@ end
                                     \texttt{false} - в случае ошибки;\\
                                     \texttt{true} - в случае успеха.
                                    } & \\ \hline
-  2 & integer & queue\_space & Если первый возврпщаемый аргумент \texttt{true}, то количество оставшегося свободного места в очереди. & \\ \hline
+  2 & integer & queue\_space & Если первый возврпщаемый аргумент \texttt{true}, то количество оставшегося свободного места для сообщений в очереди. & \\ \hline
 \end{longtable} \normalsize
 
 
@@ -801,7 +673,7 @@ local lproc_queue = require('lproc_queue')
 
 local proc_pattern = [[
 local channel_in = <channel_in>
-local ret, message, queue_count, space
+local ret, message, queue_count, queue_space
 
 -- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
 while true do
@@ -824,7 +696,7 @@ end
 
 while true do
   lproc_queue.delay_ms(321)
-  ret, space = lproc_queue.queue_push(queue__to_proc, 'message')  --[[ <--- ]]
+  ret, queue_space = lproc_queue.queue_push(queue__to_proc, 'message')  --[[ <--- ]]
   if (ret == false) then
     print('ERROR')
   end
@@ -835,16 +707,84 @@ end
 
 
 
+\newpage
+\subsubsection{\texttt{queue\_nb\_pop()} - неблокирующее извлечение сообщения из очереди}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ queue\_nb\_pop() }} \label{t:queue\_nb\_pop} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret), (lstring byte\_array), (integer queue\_count) = queue\_nb\_pop(integer queue\_pointer) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:queue_nb_pop}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & integer & queue\_pointer & Указатель на объект очереди &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки;\\
+                                    \texttt{true} - в случае успеха.
+                                   } & \\ \hline
+  2 & lstring & byte\_array  & Если первый возвращаемый аргумент \texttt{true}, то содержимое сообщения в виде массива байт &  \\ \hline
+  3 & integer & queue\_count & Если первый возврпщаемый аргумент \texttt{true}, то количество накопившихся сообщений в очереди. & \\ \hline
+\end{longtable} \normalsize
 
 
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local proc_pattern = [[
+local channel_in = <channel_in>
+local ret, message, queue_count, queue_space
+
+-- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
+while true do
+  lproc_queue.delay_ms(500)
+  print('from proc')
+  ret, message, queue_count = lproc_queue.queue_nb_pop(channel_in) --[=[ <--- ]=]
+  if( ret == false) then
+    print('from proc: ERROR')
+  else
+    print('from proc: meaasge = \''..tostring(message)..'\'')
+  end
+end
+]]
 
 
+local queue__to_proc = lproc_queue.queue_create()
+local proc = string.gsub(proc_pattern, '<channel_in>', string.format("0x%016X", queue__to_proc))
 
+local ret = lproc_queue.proc_start(proc)
 
+if (ret == false) then
+  print('ERROR')
+  os.exit()
+end
 
+while true do
+  lproc_queue.delay_ms(321)
+  ret, queue_space = lproc_queue.queue_push(queue__to_proc, 'message')
+  if (ret == false) then
+    print('ERROR')
+  end
+end
 
-
-
+\end{Lua}
 
 
 
@@ -964,6 +904,170 @@ if (ret == false) then
 end
 
 \end{Lua}
+
+
+\newpage
+\subsubsection{\texttt{sem\_post()} - неблокирующая установка семафора}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ sem\_post() }} \label{t:sem\_post} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret) = sem\_post(integer sem\_pointer) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:sem_post}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & integer & sem\_pointer & Указатель на объект семафора &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки;\\
+                                    \texttt{true} - в случае выставления семафора.
+                                   } & \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local proc_pattern = [[
+local semaphore_in = <semaphore_in>
+local ret
+
+-- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
+lproc_queue.delay_ms(500)
+
+while true do
+  print('from proc')
+  ret = lproc_queue.sem_timedwait_ms(channel_inб 500)
+end
+]]
+
+local semaphore__to_proc = lproc_queue.sem_create()
+local proc = string.gsub(proc_pattern, '<semaphore_in>', string.format("0x%016X", semaphore__to_proc))
+
+local ret = lproc_queue.proc_start(proc)
+
+if (ret == false) then
+  print('ERROR')
+  os.exit()
+end
+
+while true do
+  lproc_queue.delay_ms(321)
+  ret = lproc_queue.sem_post(semaphore__to_proc)  --[[ <--- ]]
+  if (ret == false) then
+    print('ERROR')
+  end
+end
+
+\end{Lua}
+
+
+
+
+\newpage
+\subsubsection{\texttt{sem\_timedwait\_ms()} - блокирующее ожидание семафора или истечения таймаута}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{26mm}|L{73mm}|C{21mm}|}
+  \caption{Функция \texttt{ sem\_timedwait\_ms() }} \label{t:sem_timedwait_ms} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering (boolean ret), (string status) = sem\_timedwait\_ms(integer sem\_pointer, integer timeout\_ms) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:sem_timedwait_ms}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{26mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{21mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & integer & sem\_pointer & Указатель на объект семафора &  \\ \hline
+  2 & integer & timeout\_ms  & Таймаут ожидания, мС &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & boolean & ret & \parbox{73mm}{\vspace{1mm} 
+                                    \texttt{false} - в случае ошибки или таймаута;\\
+                                    \texttt{true} - в случае получения семафора.
+                                   } & \\ \hline
+  2 & string & status & \parbox{73mm}{\vspace{1mm} 
+                                    Если первый возвращаемый аргумент \texttt{false}, то: \\
+                                    \texttt{timeout} - в случае таймаута;\\
+                                    \texttt{error} - в случае ошибки.
+                                   } &  \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local proc_pattern = [[
+local semaphore_in = <semaphore_in>
+local ret
+
+-- Библиотека 'lproc_queue' автоматически подключается к созданному процессу
+lproc_queue.delay_ms(500)
+
+while true do
+  print('from proc')
+  ret = lproc_queue.sem_timedwait_ms(channel_in, 500)
+end
+]]
+
+local semaphore__to_proc = lproc_queue.sem_create()
+local proc = string.gsub(proc_pattern, '<semaphore_in>', string.format("0x%016X", semaphore__to_proc))
+
+local ret = lproc_queue.proc_start(proc)
+
+if (ret == false) then
+  print('ERROR')
+  os.exit()
+end
+
+while true do
+  lproc_queue.delay_ms(321)
+  ret = lproc_queue.sem_post(semaphore__to_proc)  --[[ <--- ]]
+  if (ret == false) then
+    print('ERROR')
+  end
+end
+\end{Lua}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -27,9 +27,8 @@
 #include "lualib.h"
 
 #include "fifo.h"
-#include "ul_time.h"
 
-#define VERSION		"{ version = '0.1' }"
+#define VERSION		"{ version = '0.2a' }"
 
 
 #include "debug.h"
@@ -169,6 +168,17 @@ static struct timespec timespec_from_ms(long milliseconds)
 	};
 
 	return timespec_normalise(ts);
+}
+
+
+// delay in milliseconds
+int ul_time_delay_ms(lua_State *L) {
+	struct timespec SleepTime;
+	long milliseconds = (long) luaL_checkinteger(L, 1);
+	SleepTime = timespec_from_ms(milliseconds);
+	nanosleep(&SleepTime, NULL);
+
+	return 0;
 }
 
 
@@ -624,10 +634,7 @@ static int ll_version(lua_State *L) {
 
 
 static const luaL_Reg ll_funcs[] = {
-  { "delay_us", ul_time_delay_us },
   { "delay_ms", ul_time_delay_ms },
-  { "delay_s", ul_time_delay_s },
-  { "timeofday", ul_timeofday },
   { "sem_create", ll_sem_create },
   { "sem_destroy", ll_sem_destroy },
   { "sem_post", ll_sem_post },
