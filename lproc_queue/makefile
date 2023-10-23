@@ -27,9 +27,9 @@ ifeq ($(TARGET_SYSTEM),)
 	# Для сборки buildroot
 	#$(MAKE) CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D)
 	 GCC ?= $(CC)
-	 INC_LUA_DIR ?= 
+	 INC_LUA_DIR ?= .
 	 LIB_LUA_DIR ?= $(PREFIX)/lib
-	 LIB_PTHREAD_DIR ?= 
+	 LIB_PTHREAD_DIR ?= .
 	 LIB_LUA ?= lua
 endif
 # Сборка под host
