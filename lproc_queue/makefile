@@ -26,11 +26,11 @@ TARGET_SYSTEM ?= Ubuntu_host_Linux_FS
 ifeq ($(TARGET_SYSTEM),)
 	# Для сборки buildroot
 	#$(MAKE) CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D)
-	 GCC ?= $(CC)
-	 INC_LUA_DIR ?= .
-	 LIB_LUA_DIR ?= $(PREFIX)/lib
-	 LIB_PTHREAD_DIR ?= .
-	 LIB_LUA ?= lua
+	GCC ?= $(CC)
+	INC_LUA_DIR ?= .
+	LIB_LUA_DIR ?= $(STAGING_DIR)/usr/lib 
+	LIB_PTHREAD_DIR ?= $(STAGING_DIR)/usr/lib 
+	LIB_LUA ?= lua
 endif
 # Сборка под host
 ifeq ($(TARGET_SYSTEM), Ubuntu_host_Linux_FS)
@@ -92,6 +92,7 @@ clean:
 main-build: prepare $(TARGET_NAME)
 
 prepare:
+	printenv
 	mkdir -p $(BUILD_FOLDER)
 
 # Tool invocations
