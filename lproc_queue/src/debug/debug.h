@@ -28,10 +28,10 @@
 #define DBG_SYSTEM__LPROC_QUEUE				(1 << 31)
 
 
-#define DBG_INFO_3							(1 << 4)
-#define DBG_INFO_2							(1 << 3)
-#define DBG_INFO_1							(1 << 2)
-#define DBG_INFO_0							(1 << 1)
+#define DBG_INFO_3							(1 << 3)
+#define DBG_INFO_2							(1 << 2)
+#define DBG_INFO_1							(1 << 1)
+#define DBG_INFO_0							(1 << 0)
 
 #define PRINT_INFO_SETTINGS                                                               \
 char _str_[4096];                                                                         \
@@ -41,10 +41,10 @@ if(_logout_)                                                                    
   pos += sprintf(&_str_[pos], "{\n");                                                     \
   pos += sprintf(&_str_[pos], "  {bit = 31, name = \"DBG_SYSTEM__LPROC_QUEUE\",     value = %s},\n", (_logout_ & DBG_SYSTEM__LPROC_QUEUE)     ? "true " : "false");\
 \
-  pos += sprintf(&_str_[pos], "  {bit =  4, name = \"DBG_INFO_3\", value = %s},\n", (_logout_ & DBG_INFO_3) ? "true " : "false");\
-  pos += sprintf(&_str_[pos], "  {bit =  3, name = \"DBG_INFO_2\", value = %s},\n", (_logout_ & DBG_INFO_2) ? "true " : "false");\
-  pos += sprintf(&_str_[pos], "  {bit =  2, name = \"DBG_INFO_1\", value = %s},\n", (_logout_ & DBG_INFO_1) ? "true " : "false");\
-  pos += sprintf(&_str_[pos], "  {bit =  1, name = \"DBG_INFO_0\", value = %s},\n", (_logout_ & DBG_INFO_0) ? "true " : "false");\
+  pos += sprintf(&_str_[pos], "  {bit =  3, name = \"DBG_INFO_3\", value = %s},\n", (_logout_ & DBG_INFO_3) ? "true " : "false");\
+  pos += sprintf(&_str_[pos], "  {bit =  2, name = \"DBG_INFO_2\", value = %s},\n", (_logout_ & DBG_INFO_2) ? "true " : "false");\
+  pos += sprintf(&_str_[pos], "  {bit =  1, name = \"DBG_INFO_1\", value = %s},\n", (_logout_ & DBG_INFO_1) ? "true " : "false");\
+  pos += sprintf(&_str_[pos], "  {bit =  0, name = \"DBG_INFO_0\", value = %s},\n", (_logout_ & DBG_INFO_0) ? "true " : "false");\
   pos += sprintf(&_str_[pos], "}\n");                                                     \
 };                                                                                        \
 

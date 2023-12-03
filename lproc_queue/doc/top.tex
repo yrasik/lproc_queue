@@ -1068,4 +1068,55 @@ end
 
 
 
+
+\subsection{\texttt{debug\_mode()} - включение режима выдачи отладочных сообщений}
+
+\small
+\begin{longtable}{|C{7mm}|C{15mm}|C{30mm}|L{73mm}|C{17mm}|}
+  \caption{Функция \texttt{ debug\_mode() }} \label{t:debug_mode} \\
+  \hline
+  \rowcolor{ColorFunction}
+  \multicolumn{5}{|c|}{\centering  (string debug\_info) = debug\_mode(string debug\_enable\_flags) } \\\hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{30mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{17mm}|}{\centering По умолчанию} \\\hline
+  \endfirsthead
+  \caption*{Продолжение таблицы \ref{t:debug_mode}} \\
+  \hline
+  \rowcolor{Gray}
+  \multicolumn{1}{|C{7mm}}{№} &
+  \multicolumn{1}{|C{15mm}}{\centering Тип} &
+  \multicolumn{1}{|C{30mm}}{\centering Имя} &
+  \multicolumn{1}{|L{73mm}}{\centering Описание} &
+  \multicolumn{1}{|C{17mm}|}{\centering По умолчанию} \\\hline
+  \endhead
+  \rowcolor{ColorArgs}
+  \multicolumn{5}{|c|}{\centering Аргументы } \\\hline
+  1 & string & debug\_enable\_flags & \parbox{73mm}{\vspace{1mm} 
+                                         Флаги кастомизации отладки. Запись типа \\ \scriptsize\texttt{0b1000\_0000\_0000\_0000\_0000\_0000\_0000\_1111}\small (32-битное число, представленное в битовом формате. Старший бит слева).\\
+                                         \\
+                                         Младшие биты 3, 2, 1, 0 отвечают за тип отладочных сообщений (записи в коде \texttt{info\_3("--//--");}, \texttt{info\_2("--//--");}, \texttt{info\_1("--//--");}, \texttt{info\_0("--//--");} соответственно).\\
+                                         \\
+                                         Все остальные старшие биты отвечают за файлы из которых выводятся отладочные сообщения.
+                                      \vspace{1mm} } &  \\ \hline
+  \rowcolor{ColorRet}
+  \multicolumn{5}{|c|}{\centering Возвращаемые значения } \\\hline
+  1 & string & debug\_info & Отчет о кастомизации отладки &  \\ \hline
+\end{longtable} \normalsize
+
+
+\begin{Lua}
+local lproc_queue = require('lproc_queue')
+
+local debug_info = lproc_queue.debug_mode('0b1000_0000_0000_0000_0000_0000_0000_1111') --[[ <--- ]]
+print(debug_info)
+\end{Lua}
+
+
+
+
+
 \end{document}
